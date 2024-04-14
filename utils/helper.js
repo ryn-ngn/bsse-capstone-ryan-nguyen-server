@@ -31,17 +31,17 @@ const hashPassword = async (inputPassword) => {
 };
 
 // isUserNameAvailable
-const isUserNameAvailable = async(userName) => {
+const isUserNameAvailable = async (userName) => {
   try {
     const users = await getAllUsers();
     // attempt to look for userName in existing data
-    const matchingUserName = users.find(user => user.userName === userName)
+    const matchingUserName = users.find((user) => user.userName === userName);
     // return the negated find result
     return !matchingUserName;
   } catch (error) {
-
+    console.error("Unable to verify new userName", error);
   }
-}
+};
 
 // getAllUsers
 const getAllUsers = async () => {

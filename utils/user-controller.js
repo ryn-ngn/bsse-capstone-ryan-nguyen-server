@@ -7,20 +7,20 @@ const {
 } = require("../utils/helper");
 
 // register a new user
+// expected body: { userName, fistName, password}
 const createNewUser = async (req, res) => {
+  const { userName, firstName, password } = req.body;
+
+  if (!isStringInputValid([userName, firstName, password])) {
+    return res.status(400).json({ message: "Empty or Invalid input" });
+  }
+
+  if (!isUserNameAvailable(userName)) {
+    return res.status(400).json({ message: "Username has been taken" });
+  }
+
+  const hashedPassword = await hashPassword(password);
   try {
-    const { userName, firstName, password } = req.body;
-
-    if (!isStringInputValid([userName, firstName, password])) {
-      return res.status(400).json({ message: "Invalid input" });
-    }
-
-    if (!isUserNameAvailable(userName)) {
-      return res.status(400).json({ message: "Username has been taken" });
-    }
-
-    const hashedPassword = await hashPassword(password);
-
     const [newUser] = await knex("users").insert({
       id: uuid(),
       userName,
@@ -28,11 +28,9 @@ const createNewUser = async (req, res) => {
       firstName,
     });
 
-    return res.status(201).json(newUser);
+    return res.status(201).send("Registered successfully");
   } catch (error) {
-    res.status(500).json({
-      message: `Unable to register new user: ${error.message}`,
-    });
+    res.status(400).res.status(400).send("Failed registration");
   }
 };
 

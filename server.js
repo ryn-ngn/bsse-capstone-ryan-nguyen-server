@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 const BASE_URL = process.env.BASE_URL || "http://localhost";
 const { getToken } = require("./utils/helper");
 
-const landing = require("./routes/landing");
+const users = require("./routes/users");
 // const collection = require("./routes/collection");
 // const serviceRecord = require("./routes/service-record");
 
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("/api", landing);
+app.use("/api/users", users);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
