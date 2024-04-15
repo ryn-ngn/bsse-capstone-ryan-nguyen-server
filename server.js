@@ -17,7 +17,7 @@ app.use(express.json());
 
 // apply authentication rule if routes being called are not login & register
 app.use((req, res, next) => {
-  if (req.url === "/api/register" || req.url === "/api/login") {
+  if (req.url === "/api/users/register" || req.url === "/api/users/login") {
     next();
   } else {
     const token = getToken(req);
