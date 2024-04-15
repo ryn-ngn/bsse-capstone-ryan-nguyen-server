@@ -1,9 +1,13 @@
 const knex = require("knex")(require("../knexfile"));
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const uuid = require("uuid").v4;
+const JWT_SECRET = process.env.JWT_SECRET;
+
 const {
   hashPassword,
   isStringInputValid,
-  isUserNameAvailable,
+  checkUserNameAvailability,
 } = require("../utils/helper");
 
 // register a new user
@@ -15,12 +19,13 @@ const createNewUser = async (req, res) => {
     return res.status(400).json({ message: "Empty or Invalid input" });
   }
 
-  if (!isUserNameAvailable(userName)) {
-    return res.status(400).json({ message: "Username has been taken" });
-  }
-
-  const hashedPassword = await hashPassword(password);
   try {
+    const isUserNameAvailable = await checkUserNameAvailability(userName);
+    const hashedPassword = await hashPassword(password);
+
+    if (!isUserNameAvailable) {
+      return res.status(400).json({ message: "Username has been taken" });
+    }
     const [newUser] = await knex("users").insert({
       id: uuid(),
       userName,
@@ -34,6 +39,36 @@ const createNewUser = async (req, res) => {
   }
 };
 
+// user login
+// expected body: { userName, password}
+// response format: {token: jwt token}
+const loginUser = async (req, res) => {
+  const { userName, password } = req.body;
+
+  if (!isStringInputValid([userName, password])) {
+    return res.status(400).json({ message: "Empty or Invalid input" });
+  }
+
+  // validate userName
+  const user = await knex("users").where({ userName: userName }).first();
+  if (!user) {
+    return res.status(400).send("Username not found");
+  }
+
+  // validate password
+  const isPasswordMatched = bcrypt.compare(password, user.password);
+  if (!isPasswordMatched) {
+    return res.status(400).send("Invalid password");
+  }
+
+  // if all validation passed, create token
+  const jwtToken = jwt.sign({ id: user.id, firstName: user.firstName }, JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  res.json({ jwtToken });
+};
 module.exports = {
   createNewUser,
+  loginUser,
 };

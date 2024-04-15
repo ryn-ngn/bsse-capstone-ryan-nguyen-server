@@ -5,8 +5,8 @@ Server Repo for BrainStation capstone project
 BE Tasks:
 
 - Setup back-end repo, mysql, migration, seeds
-- Handler for POST '/register'
-- Handler for GET '/', POST '/login'
+- Handler for POST '/api/users/register'
+- Handler for POST '/api/users/login'
 
 - Handler for GET '/collection',
 - Handler for POST '/collection'
@@ -30,3 +30,7 @@ Database includes 05 tables:
 - UserCars: ownershipId (PK), carId, userId
 - JournalEvents: eventId, ownershipId, eventType, eventDate, eventCost, eventNotes
 - UserCarInfo: infoId (PR), ownershipId, infoKey, infoValue
+
+Helper functions:
+
+-

@@ -1,5 +1,6 @@
-const bcrypt = require("bcrypt");
-const JWT_SALT_ROUNDS = process.env.JWT_SALT_ROUNDS;
+const knex = require("knex")(require("../knexfile"));
+const bcrypt = require("bcryptjs");
+const JWT_SALT_ROUNDS = parseInt(process.env.JWT_SALT_ROUNDS);
 
 const getToken = (req) => {
   if (!req.headers.authorization) {
@@ -30,8 +31,8 @@ const hashPassword = async (inputPassword) => {
   }
 };
 
-// isUserNameAvailable
-const isUserNameAvailable = async (userName) => {
+// checkUserNameAvailability
+const checkUserNameAvailability = async (userName) => {
   try {
     const users = await getAllUsers();
     // attempt to look for userName in existing data
@@ -58,5 +59,5 @@ module.exports = {
   getToken,
   hashPassword,
   isStringInputValid,
-  isUserNameAvailable,
+  checkUserNameAvailability,
 };
