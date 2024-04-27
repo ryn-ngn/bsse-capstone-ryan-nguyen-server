@@ -41,7 +41,22 @@ const postCarToCollection = async (req, res) => {
   }
 };
 
+const deleteCarFromCollection = async (req, res) => {
+  const { ownershipId } = req.body;
+  if (!ownershipId) {
+    res.status(400).res.status(400).send("OwnershipId is empty");
+  }
+
+  try {
+    await knex("userCars").where("ownershipId", ownershipId).delete();
+    return res.status(204).json("Car deleted").end();
+  } catch (error) {
+    res.status(500).res.status(400).send("Failed to delete car from collection");
+  }
+};
+
 module.exports = {
   getUserCollectionById,
   postCarToCollection,
+  deleteCarFromCollection,
 };
