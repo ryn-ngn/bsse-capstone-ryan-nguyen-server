@@ -2,14 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
 const PORT = process.env.PORT || 8080;
 const BASE_URL = process.env.BASE_URL || "http://localhost";
 const { getToken } = require("./utils/helper");
 
 const users = require("./routes/users");
 const userCars = require("./routes/userCars");
-// const serviceRecord = require("./routes/service-record");
+const journalEvents = require("./routes/journalEvents");
 
 //middleware
 app.use(cors());
@@ -42,6 +41,7 @@ app.use((req, res, next) => {
 // routes
 app.use("/api/users", users);
 app.use("/api/userCars", userCars);
+app.use("/api/journalEvents", journalEvents);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

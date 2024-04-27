@@ -1,9 +1,8 @@
+const knex = require("knex")(require("../knexfile"));
 const uuid = require("uuid").v4;
 
 // retrieve userCars
 // expected body { userId: userId }
-const knex = require("knex")(require("../knexfile"));
-
 const getUserCollectionById = async (req, res) => {
   const { userId } = req.body;
   if (!userId) {

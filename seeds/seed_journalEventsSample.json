@@ -1,0 +1,18 @@
+[
+    {
+        "eventId": "1",
+        "ownershipId": "abc123",
+        "eventType": "break fix",
+        "eventDate": "1714233122518",
+        "eventCost": "550",
+        "eventNotes": "Left and right cv axel"
+    },
+    {
+        "eventId": "2",
+        "ownershipId": "abc123",
+        "eventType": "regular maintenance",
+        "eventDate": "1714233250090",
+        "eventCost": "100",
+        "eventNotes": "Oil and oil filter"
+    }
+]

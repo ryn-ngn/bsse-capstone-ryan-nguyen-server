@@ -55,9 +55,27 @@ const getAllUsers = async () => {
   }
 };
 
+const getOwnershipId = async (carId, userId) => {
+  try {
+    const result = await knex("userCars")
+      .select("ownershipId")
+      .where({
+        carId: carId,
+        userId: userId,
+      })
+      .first();
+
+    return result ? result.ownershipId.trim() : null;
+  } catch (error) {
+    console.error("Error fetching ownershipId", error);
+    throw new Error("Error fetching ownershipId");
+  }
+};
+
 module.exports = {
   getToken,
   hashPassword,
   isStringInputValid,
   checkUserNameAvailability,
+  getOwnershipId,
 };

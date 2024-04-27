@@ -10,10 +10,7 @@ BE Tasks:
 
 - Handler for GET '/userCars',
 - Handler for POST '/userCars'
-
-- Handler for GET '/userCars/:id'
-- Handler for DELETE '/userCars/:id',
-- Handler for PUT '/userCars/:id',
+- Handler for DELETE '/userCars'
 
 - Handler for GET '/userCars/:id/service-record'
 - Handler for POST '/userCars/:id/service-record'
