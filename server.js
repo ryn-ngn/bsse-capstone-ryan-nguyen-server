@@ -2,13 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const jwt = require("jsonwebtoken");
-const jsonSecretKey = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 const PORT = process.env.PORT || 8080;
 const BASE_URL = process.env.BASE_URL || "http://localhost";
 const { getToken } = require("./utils/helper");
 
 const users = require("./routes/users");
-// const collection = require("./routes/collection");
+const userCars = require("./routes/userCars");
 // const serviceRecord = require("./routes/service-record");
 
 //middleware
@@ -18,25 +18,30 @@ app.use(express.json());
 // apply authentication rule if routes being called are not login & register
 app.use((req, res, next) => {
   if (req.url === "/api/users/register" || req.url === "/api/users/login") {
-    next();
-  } else {
-    const token = getToken(req);
+    return next();
+  }
 
-    if (token) {
-      if (jwt.verify(token, jsonSecretKey)) {
-        req.decode = jwt.decode(token);
-        next();
-      } else {
-        res.status(403).json({ error: "Not Authorized." });
-      }
-    } else {
-      res.status(403).json({ error: "No token. Unauthorized." });
-    }
+  const token = getToken(req);
+
+  if (!token) {
+    return res.status(403).json({ error: "No token provided. Unauthorized." });
+  }
+
+  try {
+    const JWT_SECRET = process.env.JWT_SECRET;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.decode = decoded;
+    next();
+  } catch (error) {
+    // JWT verification failed
+    console.error("JWT verification failed:", error);
+    return res.status(403).json({ error: "Invalid token. Unauthorized." });
   }
 });
 
 // routes
 app.use("/api/users", users);
+app.use("/api/userCars", userCars);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -8,19 +8,19 @@ BE Tasks:
 - Handler for POST '/api/users/register'
 - Handler for POST '/api/users/login'
 
-- Handler for GET '/collection',
-- Handler for POST '/collection'
+- Handler for GET '/userCars',
+- Handler for POST '/userCars'
 
-- Handler for GET '/collection/:id'
-- Handler for DELETE '/collection/:id',
-- Handler for PUT '/collection/:id',
+- Handler for GET '/userCars/:id'
+- Handler for DELETE '/userCars/:id',
+- Handler for PUT '/userCars/:id',
 
-- Handler for GET '/collection/:id/service-record'
-- Handler for POST '/collection/:id/service-record'
+- Handler for GET '/userCars/:id/service-record'
+- Handler for POST '/userCars/:id/service-record'
 
-- Handler for GET '/collection/:id/service-record/:recordId'
-- Handler for DELETE '/collection/:id/service-record/:recordId'
-- Handler for PUT '/collection/:id/service-record/:recordId'
+- Handler for GET '/userCars/:id/service-record/:recordId'
+- Handler for DELETE '/userCars/:id/service-record/:recordId'
+- Handler for PUT '/userCars/:id/service-record/:recordId'
 
 Database structure:
 Database includes 05 tables:

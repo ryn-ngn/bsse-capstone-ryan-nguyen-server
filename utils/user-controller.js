@@ -9,6 +9,7 @@ const {
   isStringInputValid,
   checkUserNameAvailability,
 } = require("../utils/helper");
+const e = require("express");
 
 // register a new user
 // expected body: { userName, fistName, password}
@@ -56,17 +57,21 @@ const loginUser = async (req, res) => {
   }
 
   // validate password
-  const isPasswordMatched = bcrypt.compare(password, user.password);
-  if (!isPasswordMatched) {
-    return res.status(400).send("Invalid password");
+  try {
+    const isPasswordMatched = await bcrypt.compare(password, user.hashedPassword);
+    if (!isPasswordMatched) {
+      return res.status(400).send("Invalid password");
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   // if all validation passed, create token
-  const jwtToken = jwt.sign({ id: user.id, firstName: user.firstName }, JWT_SECRET, {
+  const Bearer = jwt.sign({ id: user.id, firstName: user.firstName }, JWT_SECRET, {
     expiresIn: "1h",
   });
 
-  res.json({ jwtToken });
+  res.json({ Bearer });
 };
 module.exports = {
   createNewUser,
