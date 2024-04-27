@@ -49,7 +49,7 @@ const deleteCarFromCollection = async (req, res) => {
 
   try {
     await knex("userCars").where("ownershipId", ownershipId).delete();
-    return res.status(204).json("Car deleted").end();
+    return res.status(204).end();
   } catch (error) {
     res.status(500).res.status(400).send("Failed to delete car from collection");
   }

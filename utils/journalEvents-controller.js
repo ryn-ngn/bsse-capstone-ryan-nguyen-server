@@ -7,7 +7,7 @@ const { getOwnershipId } = require("./helper");
 const getAllJournalEventsByCarId = async (req, res) => {
   const { carId, userId } = req.params;
 
-  if (!carId) {
+  if (!carId || !userId) {
     res.status(400).send("car id is empty");
   }
 
@@ -30,7 +30,7 @@ const getAllJournalEventsByCarId = async (req, res) => {
 const createJournalEvent = async (req, res) => {
   const { carId, userId } = req.params;
 
-  if (!carId) {
+  if (!carId || !userId) {
     res.status(400).send("car id is empty");
   }
   const { eventType, eventCost, eventNotes } = req.body;
@@ -55,7 +55,25 @@ const createJournalEvent = async (req, res) => {
 };
 
 // delete service entry for a car ID
+const deleteJournalEventById = async (req, res) => {
+  const { eventId } = req.params;
 
+  if (!eventId) {
+    res.status(400).send("journal event empty");
+  }
+
+  try {
+    await knex("journalEvents").where("eventId", eventId).delete();
+
+    return res.status(200).json("Journal entry deleted").end();
+  } catch (error) {
+    res.status(400).send("Failed to delete service journal event");
+  }
+};
 // edit service entry for a car ID
 
-module.exports = { getAllJournalEventsByCarId, createJournalEvent };
+module.exports = {
+  getAllJournalEventsByCarId,
+  createJournalEvent,
+  deleteJournalEventById,
+};

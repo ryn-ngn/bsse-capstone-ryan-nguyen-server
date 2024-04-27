@@ -1,0 +1,12 @@
+[
+    {
+        "userName": "ryan-ngn",
+        "firstName": "Ryan Jr",
+        "password": "user1"
+    },
+    {
+        "ownershipId": "ryan-mli",
+        "firstName": "Ryan Sr",
+        "userId": "user2"
+    }
+]
