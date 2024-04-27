@@ -4,7 +4,7 @@ const uuid = require("uuid").v4;
 // retrieve userCars
 // expected body { userId: userId }
 const getUserCollectionById = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   if (!userId) {
     res.status(400).res.status(400).send("User ID is empty");
   }
@@ -20,7 +20,8 @@ const getUserCollectionById = async (req, res) => {
 // post new car to user's collection
 // expected body: {carId, userId}
 const postCarToCollection = async (req, res) => {
-  const { userId, carId } = req.body;
+  const { userId } = req.params;
+  const { carId } = req.body;
 
   if (!userId || !carId) {
     res.status(400).res.status(400).send("User ID and/or car id is empty");

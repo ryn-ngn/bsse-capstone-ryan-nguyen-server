@@ -10,7 +10,7 @@ const journalEventsSampleData = require("./seed_journalEventsSample.json");
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("cars").del();
-  await knex("users").del();
+  // await knex("users").del();
   await knex("userCars").del();
   await knex("journalEvents").del();
 
