@@ -9,7 +9,7 @@ const {
 // retrieve cars in user collection
 // expected body: [{ ownershipId, carId, userId},...]
 router
-  .route("/")
+  .route("/:userId")
   .get(getUserCollectionById)
   .post(postCarToCollection)
   .delete(deleteCarFromCollection);

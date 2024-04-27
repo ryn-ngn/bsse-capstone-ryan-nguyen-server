@@ -6,6 +6,9 @@ const {
 
 // retrieve service journal event for carId and userId
 // expected body: { userId}
-router.route("/:carId").get(getAllJournalEventsByCarId).post(createJournalEvent);
+router
+  .route("/:userId/:carId")
+  .get(getAllJournalEventsByCarId)
+  .post(createJournalEvent);
 
 module.exports = router;

@@ -5,8 +5,8 @@ const { getOwnershipId } = require("./helper");
 // retrieve service entries for a carID
 // expected body { userId: userId}
 const getAllJournalEventsByCarId = async (req, res) => {
-  const { carId } = req.params;
-  const { userId } = req.body;
+  const { carId, userId } = req.params;
+
   if (!carId) {
     res.status(400).send("car id is empty");
   }
@@ -28,11 +28,12 @@ const getAllJournalEventsByCarId = async (req, res) => {
 
 // create service entry for a car ID
 const createJournalEvent = async (req, res) => {
-  const { carId } = req.params;
+  const { carId, userId } = req.params;
+
   if (!carId) {
     res.status(400).send("car id is empty");
   }
-  const { userId, eventType, eventCost, eventNotes } = req.body;
+  const { eventType, eventCost, eventNotes } = req.body;
 
   try {
     const ownershipId = await getOwnershipId(carId, userId);
