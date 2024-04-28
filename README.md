@@ -5,6 +5,7 @@ Server Repo for BrainStation capstone project
 .env variable <must be created locally>:
 JWT_SECRET=<add here>
 JWT_SALT_ROUNDS=<add here>
+OPENAI_API_KEY=<add here>
 
 .env variable can be used or created locally:
 PORT=8080
