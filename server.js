@@ -9,6 +9,7 @@ const { getToken } = require("./utils/helper");
 const users = require("./routes/users");
 const userCars = require("./routes/userCars");
 const journalEvents = require("./routes/journalEvents");
+const cars = require("./routes/cars");
 
 //middleware
 app.use(cors());
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 app.use("/api/users", users);
 app.use("/api/userCars", userCars);
 app.use("/api/journalEvents", journalEvents);
+app.use("/api/cars", cars);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
