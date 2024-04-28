@@ -1,0 +1,12 @@
+[
+    {
+        "ownershipId": "abc123",
+        "carId": "83042",
+        "userId": "3a90cc02-4b09-41c6-a94e-aaf05a983437"
+    },
+    {
+        "ownershipId": "def456",
+        "carId": "84038",
+        "userId": "3a90cc02-4b09-41c6-a94e-aaf05a983437"
+    }
+]
