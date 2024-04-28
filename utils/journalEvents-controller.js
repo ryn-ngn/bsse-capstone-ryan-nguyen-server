@@ -65,7 +65,7 @@ const deleteJournalEventById = async (req, res) => {
   try {
     await knex("journalEvents").where("eventId", eventId).delete();
 
-    return res.status(200).json("Journal entry deleted").end();
+    return res.status(204).end();
   } catch (error) {
     res.status(400).send("Failed to delete service journal event");
   }
