@@ -6,7 +6,7 @@ const {
 } = require("../utils/journalEvents-controller");
 
 // retrieve service journal event for carId and userId
-// expected body: { userId}
+// expected params: { userId, carId}
 router
   .route("/:userId/:carId")
   .get(getAllJournalEventsByCarId)
