@@ -17,6 +17,7 @@ DB_LOCAL_PASSWORD=8808
 BE Tasks:
 
 - Setup back-end repo, mysql, migration, seeds
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   user routes:
 =======
@@ -27,6 +28,17 @@ cars route:
 - Handler for GET '/api/cars/model' (expected body: { "make": make})
 - Handler for GET '/api/cars/year' (expected body: { "make": make, model": model})
 
+=======
+
+cars route:
+
+- Handler for GET '/api/cars/lookup',
+  Expected body: {
+  "make": make,
+  "model": model,
+  "year": year
+  }
+>>>>>>> dev
 - Handler for GET '/api/cars/:carId',
   Sample response:
   {
@@ -44,21 +56,55 @@ cars route:
 
 user routes:
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> dev
 - Handler for POST '/api/users/register'
+  expected body: {
+  userName: userName,
+  firstName: firstName,
+  password: password
+  }
+
 - Handler for POST '/api/users/login'
+  Sample login response:
+  {
+  "Bearer": "token"
+  }
+
+---
 
 userCars routes:
 
 - Handler for GET '/api/userCars/:userId',
+  sample response:
+  [
+  {
+  "ownershipId": "abc123",
+  "carId": "83042",
+  "userId": "3a90cc02-4b09-41c6-a94e-aaf05a983437"
+  },
+  {
+  "ownershipId": "def456",
+  "carId": "84038",
+  "userId": "3a90cc02-4b09-41c6-a94e-aaf05a983437"
+  }
+  ]
+
 - Handler for POST '/api/userCars/:userId'
+
 - Handler for DELETE '/api/userCars/:userId'
+
+---
 
 journalEvents routes:
 
 - Handler for GET '/api/journalEvents/:userId/:carId'
 - Handler for POST '/api/journalEvents/:userId/:carId'
 - Handler for DELETE '/api/journalEvents/:userId/:carId/:eventId'
+
+---
 
 Database structure:
 Database includes 05 tables:

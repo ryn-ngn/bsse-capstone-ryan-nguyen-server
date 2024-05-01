@@ -18,7 +18,7 @@ const getUserCollectionById = async (req, res) => {
 };
 
 // post new car to user's collection
-// expected body: {carId, userId}
+// expected params: {carId, userId}
 const postCarToCollection = async (req, res) => {
   const { userId } = req.params;
   const { carId } = req.body;
