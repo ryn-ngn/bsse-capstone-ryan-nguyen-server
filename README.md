@@ -17,6 +17,18 @@ DB_LOCAL_PASSWORD=8808
 BE Tasks:
 
 - Setup back-end repo, mysql, migration, seeds
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+  user routes:
+=======
+
+cars route:
+
+- Handler for GET '/api/cars/make',
+- Handler for GET '/api/cars/model' (expected body: { "make": make})
+- Handler for GET '/api/cars/year' (expected body: { "make": make, model": model})
+
+=======
 
 cars route:
 
@@ -26,6 +38,7 @@ cars route:
   "model": model,
   "year": year
   }
+>>>>>>> dev
 - Handler for GET '/api/cars/:carId',
   Sample response:
   {
@@ -43,6 +56,10 @@ cars route:
 
 user routes:
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> dev
 - Handler for POST '/api/users/register'
   expected body: {
   userName: userName,
