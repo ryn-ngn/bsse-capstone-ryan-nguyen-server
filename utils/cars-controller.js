@@ -81,9 +81,36 @@ const getCarYearFromMakeModel = async (req, res) => {
   }
 };
 
+// GET all car year from makes and model
+const getCarFromMakeModelYear = async (req, res) => {
+  const { make, model, year } = req.params;
+
+  if (!make || !model || !year) {
+    return res.status(400).send('Make, model, and year are required');
+  }
+
+  try {
+    const result = await knex('cars').where({
+      make: make,
+      model: model,
+      year: year,
+    });
+
+    if (result.length === 0) {
+      return res.status(404).send('Car not found');
+    }
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error('Failed to find car:', error);
+    return res.status(500).send('Failed to find car');
+  }
+};
+
 module.exports = {
   getBasicCarInfoById,
   getAllCarMakes,
   getCarModelFromMake,
   getCarYearFromMakeModel,
+  getCarFromMakeModelYear,
 };
