@@ -1,25 +1,25 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   getBasicCarInfoById,
   getAllCarMakes,
   getCarModelFromMake,
   getCarYearFromMakeModel,
-} = require("../utils/cars-controller");
+} = require('../utils/cars-controller');
 
-// GET /api/cars/make
-router.route("/make").get(getAllCarMakes);
+// GET car makes
+router.route('/make').get(getAllCarMakes);
 
-// GET /api/cars/model
+// GET car models
 // expect body: { make }
-router.route("/model").get(getCarModelFromMake);
+router.route('/:make').get(getCarModelFromMake);
 
-// GET /api/cars/year
+// GET car years
 // expect body: { make, model }
-router.route("/year").get(getCarYearFromMakeModel);
+router.route('/:make/:model').get(getCarYearFromMakeModel);
 
 // GET /api/cars/:carId
 // retrieve basic car info from database
 // expected params: { carId }
-router.route("/:carId").get(getBasicCarInfoById);
+router.route('/:carId').get(getBasicCarInfoById);
 
 module.exports = router;
