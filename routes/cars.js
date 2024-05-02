@@ -13,18 +13,18 @@ const {
 router.route('/:carId').get(getBasicCarInfoById);
 
 // GET car makes
-router.route('/make').get(getAllCarMakes);
+router.route('/filter/make').get(getAllCarMakes);
 
 // GET car models
 // expect body: { make }
-router.route('/:make').get(getCarModelFromMake);
+router.route('/filter/:make').get(getCarModelFromMake);
 
 // GET car years
 // expect body: { make, model }
-router.route('/:make/:model').get(getCarYearFromMakeModel);
+router.route('/filter/:make/:model').get(getCarYearFromMakeModel);
 
 // GET cars by make model year
 // expect body: { make, model }
-router.route('/:make/:model/:year').get(getCarFromMakeModelYear);
+router.route('/filter/:make/:model/:year').get(getCarFromMakeModelYear);
 
 module.exports = router;
