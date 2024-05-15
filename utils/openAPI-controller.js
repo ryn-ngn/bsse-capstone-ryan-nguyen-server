@@ -20,7 +20,7 @@ const getAdditionalCarInfo = async (req, res) => {
         },
         {
           role: 'user',
-          content: `For ${year} ${make} ${model}, recommend value for each key: wheel-size, bolt-pattern, center-bore, tire-size, left-wipe-blade, right-wiper-blade, oil-type. Return result in JSON format, don't alter the key strings`,
+          content: `For ${year} ${make} ${model}, recommend value for each key: wheel_size, bolt_pattern, center_bore, tire_size, left_wipe_blade, right_wiper_blade, oil_type. Return result in JSON format, don't alter the key strings`,
         },
       ],
       model: 'gpt-3.5-turbo-0125',
