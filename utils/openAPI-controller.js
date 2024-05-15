@@ -20,7 +20,7 @@ const getAdditionalCarInfo = async (req, res) => {
         },
         {
           role: 'user',
-          content: `For ${year} ${make} ${model}, provide below recommendation in JSON format without repeating the provided car details and without putting info as value of recommendations key: wheel-size, bolt-pattern, center-bore, tire-size, left-wipe-blade, right-wiper-blade, oil-type.`,
+          content: `For ${year} ${make} ${model}, recommend value for each key: wheel-size, bolt-pattern, center-bore, tire-size, left-wipe-blade, right-wiper-blade, oil-type. Return result in JSON format, don't alter the key strings`,
         },
       ],
       model: 'gpt-3.5-turbo-0125',
@@ -29,7 +29,9 @@ const getAdditionalCarInfo = async (req, res) => {
 
     // Check if completion object and choices array exist
     if (completion && completion.choices && completion.choices.length > 0) {
-      return res.status(200).json(completion.choices[0].message.content);
+      const response = completion.choices[0].message.content;
+      const responseJSON = JSON.parse(response);
+      return res.status(200).json(responseJSON);
     } else {
       res.status(400).send('Invalid completion response format');
     }
